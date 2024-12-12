@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { Timer } from "lucide-react"
 import { useState } from "react"
+import Link from "next/link";
 
 
 export default function Home() {
@@ -51,7 +52,9 @@ export default function Home() {
 
         </CardContent>
         <CardFooter>
-          <Button className="w-full"><Timer />スタート</Button>
+          <Link href={{ pathname: "timer", query: { "t": time.toString() } }}>
+            <Button className="w-full"><Timer />スタート</Button>
+          </Link>
         </CardFooter>
       </Card>
 
