@@ -47,7 +47,7 @@ export default function TimerPage() {
         <div className="w-[100vw] h-[100vh] flex items-center justify-center flex-col gap-3">
             <div className="text-9xl font-bold">{timer == -6 ? "READY" : (timer == 0 || timer == 1) ? "START" : Math.abs(timer)}</div>
             <audio
-                src="/jihou.mp3"
+                src="/timer.wav"
                 ref={playerRef}
             />
 
