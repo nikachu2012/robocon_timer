@@ -1,0 +1,12 @@
+{
+    "theme_color": "#000000",
+    "background_color": "#000000",
+    "orientation": "any",
+    "display": "standalone",
+    "dir": "auto",
+    "lang": "ja-JP",
+    "name": "Robocon timer",
+    "short_name": "Robocon timer",
+    "start_url": "https://robocontimer.nikachu.net",
+    "scope": "https://robocontimer.nikachu.net/"
+}
