@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button"
 import { Undo2 } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation"
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Suspense } from "react";
 
-export default function TimerPage() {
+function Timer() {
     const searchParams = useSearchParams();
 
     const time = parseInt(searchParams.get("t") || "0") || 0;
@@ -40,7 +40,7 @@ export default function TimerPage() {
             }
         }, 1000);
         return () => clearInterval(intervalID)
-    }, []);
+    }, [time]);
 
     function convert(time: number): string {
         if (timer == -6) {
@@ -63,12 +63,21 @@ export default function TimerPage() {
     }
 
     return <>
+        <div className="text-9xl font-bold">{convert(timer)}</div>
+
+        <audio
+            src="/timer.wav"
+            ref={playerRef}
+        />
+    </>
+}
+export default function TimerPage() {
+
+    return <>
         <div className="w-[100vw] h-[100vh] flex items-center justify-center flex-col gap-3">
-            <div className="text-9xl font-bold">{convert(timer)}</div>
-            <audio
-                src="/timer.wav"
-                ref={playerRef}
-            />
+            <Suspense>
+                <Timer />
+            </Suspense>
 
             <Link href={"/"}>
                 <Button><Undo2 />戻る</Button>
