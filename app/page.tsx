@@ -10,6 +10,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Timer } from "lucide-react"
 import { useState } from "react"
 import Link from "next/link";
@@ -17,6 +18,8 @@ import Link from "next/link";
 
 export default function Home() {
   const [time, setTime] = useState(300);
+  const [isMinutes, setIsMinutes] = useState<boolean>(false);
+
   const addTime = (timedelta: number) => {
     if ((time + timedelta) < 0) {
       setTime(0);
@@ -50,9 +53,19 @@ export default function Home() {
             <Button variant="secondary" onClick={() => addTime(60)}>+60s</Button>
           </div>
 
+          <div className="flex items-center space-x-2 pt-4 ml-1">
+            <Checkbox id="terms" onCheckedChange={e => setIsMinutes(e == "indeterminate" ? false : e)} defaultChecked={false} />
+            <label
+              htmlFor="terms"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              分秒表示にする
+            </label>
+          </div>
+
         </CardContent>
         <CardFooter>
-          <Link href={{ pathname: "timer", query: { "t": time.toString() } }}>
+          <Link href={{ pathname: "timer", query: { "t": time.toString(), "m": isMinutes ? "true" : "false" } }}>
             <Button className="w-full"><Timer />スタート</Button>
           </Link>
         </CardFooter>
