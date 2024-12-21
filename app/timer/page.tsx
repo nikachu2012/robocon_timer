@@ -18,6 +18,29 @@ function Timer() {
 
     const playerRef = useRef<HTMLAudioElement>(null);
 
+    // ポイント表示
+    const showPoint = searchParams.get("p") == "true" ? true : false;
+    const leftTeamName = decodeURIComponent(searchParams.get("lt") || encodeURIComponent("チームA"));
+    const rightTeamName = decodeURIComponent(searchParams.get("rt") || encodeURIComponent("チームB"));
+
+    const [leftPoint, setLeftPoint] = useState<number>(0);
+    const addLeftPoint = (timedelta: number) => {
+        if ((leftPoint + timedelta) < 0) {
+            setLeftPoint(0);
+            return;
+        }
+        setLeftPoint((time) => time + timedelta)
+    };
+    const [rightPoint, setRightPoint] = useState<number>(0);
+    const addRightPoint = (timedelta: number) => {
+        if ((rightPoint + timedelta) < 0) {
+            setRightPoint(0);
+            return;
+        }
+        setRightPoint((time) => time + timedelta)
+    };
+
+
     useEffect(() => {
         timerRef.current = timer;
     }, [timer]);
@@ -63,39 +86,7 @@ function Timer() {
     }
 
     return <>
-        <div className="text-9xl font-bold">{convert(timer)}</div>
 
-        <audio
-            src="/timer.wav"
-            ref={playerRef}
-        />
-    </>
-}
-export default function TimerPage() {
-    const searchParams = useSearchParams();
-    // ポイント表示
-    const showPoint = searchParams.get("p") == "true" ? true : false;
-    const leftTeamName = decodeURIComponent(searchParams.get("lt") || encodeURIComponent("チームA"));
-    const rightTeamName = decodeURIComponent(searchParams.get("rt") || encodeURIComponent("チームB"));
-
-    const [leftPoint, setLeftPoint] = useState<number>(0);
-    const addLeftPoint = (timedelta: number) => {
-        if ((leftPoint + timedelta) < 0) {
-            setLeftPoint(0);
-            return;
-        }
-        setLeftPoint((time) => time + timedelta)
-    };
-    const [rightPoint, setRightPoint] = useState<number>(0);
-    const addRightPoint = (timedelta: number) => {
-        if ((rightPoint + timedelta) < 0) {
-            setRightPoint(0);
-            return;
-        }
-        setRightPoint((time) => time + timedelta)
-    };
-
-    return <>
         <div className="w-[100svw] h-[100svh] flex flex-col">
             {showPoint ?
                 <div className="w-[100svw] flex gap-1">
@@ -108,9 +99,13 @@ export default function TimerPage() {
                 </div>
                 : <></>}
             <div className="w-full h-full flex items-center justify-center flex-col gap-3">
-                <Suspense>
-                    <Timer />
-                </Suspense>
+
+                <div className="text-9xl font-bold">{convert(timer)}</div>
+
+                <audio
+                    src="/timer.wav"
+                    ref={playerRef}
+                />
 
                 <Link href={"/"}>
                     <Button><Undo2 />戻る</Button>
@@ -149,6 +144,14 @@ export default function TimerPage() {
                 : <></>}
         </div>
 
+
+    </>
+}
+export default function TimerPage() {
+    return <>
+        <Suspense>
+            <Timer />
+        </Suspense>
     </>
 }
 
