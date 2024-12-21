@@ -17,8 +17,11 @@ import Link from "next/link";
 
 
 export default function Home() {
-  const [time, setTime] = useState(300);
+  const [time, setTime] = useState<number>(300);
   const [isMinutes, setIsMinutes] = useState<boolean>(false);
+  const [isShowPoint, setIsShowPoint] = useState<boolean>(false);
+  const [leftTeamName, setLeftTeamName] = useState<string>("チームA");
+  const [rightTeamName, setRightTeamName] = useState<string>("チームB");
 
   const addTime = (timedelta: number) => {
     if ((time + timedelta) < 0) {
@@ -41,7 +44,7 @@ export default function Home() {
         <CardContent className="flex flex-col gap-2">
           <div className="grid w-full items-center gap-1.5">
             <Label htmlFor="saveName">時間</Label>
-            <Input type="number" id="email" min={0} value={time} onChange={e => setTime(parseInt(e.target.value) || 0)} className="w-full" />
+            <Input type="number" id="saveName" min={0} value={time} onChange={e => setTime(parseInt(e.target.value) || 0)} className="w-full" />
           </div>
 
           <div className="flex w-full *:flex-grow gap-0.5">
@@ -63,14 +66,45 @@ export default function Home() {
             </label>
           </div>
 
+          <div className="flex items-center space-x-2 pt-4 ml-1">
+            <Checkbox id="showPoint" onCheckedChange={e => setIsShowPoint(e == "indeterminate" ? false : e)} defaultChecked={false} />
+            <label
+              htmlFor="showPoint"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              点数を表示する
+            </label>
+          </div>
+
+          <div className="flex gap-1">
+            <div className="grid w-full max-w-sm items-center gap-1.5 pt-4">
+              <Label htmlFor="teamLeft">左側チーム名(赤)</Label>
+              <Input type="text" id="teamLeft" placeholder="チームA" disabled={!isShowPoint} onChange={e => setLeftTeamName(e.target.value)} />
+            </div>
+            <div className="grid w-full max-w-sm items-center gap-1.5 pt-4">
+              <Label htmlFor="teamRight">右側チーム名(青)</Label>
+              <Input type="text" id="teamRight" placeholder="チームB" disabled={!isShowPoint} onChange={e => setRightTeamName(e.target.value)} />
+            </div>
+          </div>
+
         </CardContent>
         <CardFooter>
-          <Link href={{ pathname: "timer", query: { "t": time.toString(), "m": isMinutes ? "true" : "false" } }}>
+          <Link href={{
+            pathname: "timer",
+            query: {
+              "t": time.toString(),
+              "m": isMinutes ? "true" : "false",
+              "p": isShowPoint ? "true" : "false",
+              "lt": encodeURIComponent(leftTeamName),
+              "rt": encodeURIComponent(rightTeamName)
+            }
+          }}
+          >
             <Button className="w-full"><Timer />スタート</Button>
           </Link>
         </CardFooter>
       </Card>
 
-    </div>
+    </div >
   );
 }

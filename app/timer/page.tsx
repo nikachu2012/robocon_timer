@@ -72,16 +72,93 @@ function Timer() {
     </>
 }
 export default function TimerPage() {
+    const searchParams = useSearchParams();
+    // ポイント表示
+    const showPoint = searchParams.get("p") == "true" ? true : false;
+    const leftTeamName = decodeURIComponent(searchParams.get("lt") || encodeURIComponent("チームA"));
+    const rightTeamName = decodeURIComponent(searchParams.get("rt") || encodeURIComponent("チームB"));
+
+    const [leftPoint, setLeftPoint] = useState<number>(0);
+    const addLeftPoint = (timedelta: number) => {
+        if ((leftPoint + timedelta) < 0) {
+            setLeftPoint(0);
+            return;
+        }
+        setLeftPoint((time) => time + timedelta)
+    };
+    const [rightPoint, setRightPoint] = useState<number>(0);
+    const addRightPoint = (timedelta: number) => {
+        if ((rightPoint + timedelta) < 0) {
+            setRightPoint(0);
+            return;
+        }
+        setRightPoint((time) => time + timedelta)
+    };
 
     return <>
-        <div className="w-[100vw] h-[100vh] flex items-center justify-center flex-col gap-3">
-            <Suspense>
-                <Timer />
-            </Suspense>
+        <div className="w-[100svw] h-[100svh] flex flex-col">
+            {true ?
+                <div className="w-[100svw] flex gap-1">
+                    <div className="w-[50svw] bg-[#EF0E0F]">
+                        <PointView point={leftPoint} teamName={leftTeamName} />
+                    </div>
+                    <div className="w-[50svw] bg-[#0E7FED]">
+                        <PointView point={rightPoint} teamName={rightTeamName} />
+                    </div>
+                </div>
+                : <></>}
+            <div className="w-full h-full flex items-center justify-center flex-col gap-3">
+                <Suspense>
+                    <Timer />
+                </Suspense>
 
-            <Link href={"/"}>
-                <Button><Undo2 />戻る</Button>
-            </Link>
+                <Link href={"/"}>
+                    <Button><Undo2 />戻る</Button>
+                </Link>
+            </div>
+
+            {true ?
+                <div className="w-[100svw] flex justify-between">
+                    <div className="w-[40svw] m-5">
+                        <div className="flex w-full *:flex-grow gap-0.5">
+                            <Button variant="secondary" onClick={() => addLeftPoint(-100)}>-100</Button>
+                            <Button variant="secondary" onClick={() => addLeftPoint(-60)}>-60</Button>
+                            <Button variant="secondary" onClick={() => addLeftPoint(-40)}>-40</Button>
+                            <Button variant="secondary" onClick={() => addLeftPoint(-10)}>-10</Button>
+
+                            <Button variant="secondary" onClick={() => addLeftPoint(10)}>+10</Button>
+                            <Button variant="secondary" onClick={() => addLeftPoint(40)}>+40</Button>
+                            <Button variant="secondary" onClick={() => addLeftPoint(60)}>+60</Button>
+                            <Button variant="secondary" onClick={() => addLeftPoint(100)}>+100</Button>
+                        </div>
+                    </div>
+                    <div className="w-[40svw] m-5">
+                        <div className="flex w-full *:flex-grow gap-0.5">
+                            <Button variant="secondary" onClick={() => addRightPoint(-100)}>-100</Button>
+                            <Button variant="secondary" onClick={() => addRightPoint(-60)}>-60</Button>
+                            <Button variant="secondary" onClick={() => addRightPoint(-40)}>-40</Button>
+                            <Button variant="secondary" onClick={() => addRightPoint(-10)}>-10</Button>
+
+                            <Button variant="secondary" onClick={() => addRightPoint(10)}>+10</Button>
+                            <Button variant="secondary" onClick={() => addRightPoint(40)}>+40</Button>
+                            <Button variant="secondary" onClick={() => addRightPoint(60)}>+60</Button>
+                            <Button variant="secondary" onClick={() => addRightPoint(100)}>+100</Button>
+                        </div>
+                    </div>
+                </div>
+                : <></>}
+        </div>
+
+    </>
+}
+
+function PointView({ point, teamName }: { point: number, teamName: string }) {
+    return <>
+        <div className="flex flex-col items-center p-3">
+            <div className="m-[10px] w-full bg-black text-center py-3 text-white text-9xl font-semibold">
+                {point}
+            </div>
+            <div className="font-extrabold text-4xl py-1">{teamName}</div>
         </div>
     </>
 }
