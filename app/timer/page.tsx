@@ -97,7 +97,7 @@ export default function TimerPage() {
 
     return <>
         <div className="w-[100svw] h-[100svh] flex flex-col">
-            {true ?
+            {showPoint ?
                 <div className="w-[100svw] flex gap-1">
                     <div className="w-[50svw] bg-[#EF0E0F]">
                         <PointView point={leftPoint} teamName={leftTeamName} />
@@ -117,7 +117,7 @@ export default function TimerPage() {
                 </Link>
             </div>
 
-            {true ?
+            {showPoint ?
                 <div className="w-[100svw] flex justify-between">
                     <div className="w-[40svw] m-5">
                         <div className="flex w-full *:flex-grow gap-0.5">
