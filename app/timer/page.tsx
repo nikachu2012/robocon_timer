@@ -116,28 +116,28 @@ function Timer() {
                 <div className="w-[100svw] flex justify-between">
                     <div className="w-[40svw] m-5">
                         <div className="flex w-full *:flex-grow gap-0.5">
-                            <Button variant="secondary" onClick={() => addLeftPoint(-100)}>-100</Button>
-                            <Button variant="secondary" onClick={() => addLeftPoint(-60)}>-60</Button>
-                            <Button variant="secondary" onClick={() => addLeftPoint(-40)}>-40</Button>
+                            <Button variant="secondary" onClick={() => addLeftPoint(-30)}>-30</Button>
+                            <Button variant="secondary" onClick={() => addLeftPoint(-20)}>-20</Button>
                             <Button variant="secondary" onClick={() => addLeftPoint(-10)}>-10</Button>
+                            <Button variant="secondary" onClick={() => addLeftPoint(-5)}>-5</Button>
 
+                            <Button variant="secondary" onClick={() => addLeftPoint(5)}>+5</Button>
                             <Button variant="secondary" onClick={() => addLeftPoint(10)}>+10</Button>
-                            <Button variant="secondary" onClick={() => addLeftPoint(40)}>+40</Button>
-                            <Button variant="secondary" onClick={() => addLeftPoint(60)}>+60</Button>
-                            <Button variant="secondary" onClick={() => addLeftPoint(100)}>+100</Button>
+                            <Button variant="secondary" onClick={() => addLeftPoint(20)}>+20</Button>
+                            <Button variant="secondary" onClick={() => addLeftPoint(30)}>+30</Button>
                         </div>
                     </div>
                     <div className="w-[40svw] m-5">
                         <div className="flex w-full *:flex-grow gap-0.5">
-                            <Button variant="secondary" onClick={() => addRightPoint(-100)}>-100</Button>
-                            <Button variant="secondary" onClick={() => addRightPoint(-60)}>-60</Button>
-                            <Button variant="secondary" onClick={() => addRightPoint(-40)}>-40</Button>
+                            <Button variant="secondary" onClick={() => addRightPoint(-30)}>-30</Button>
+                            <Button variant="secondary" onClick={() => addRightPoint(-20)}>-20</Button>
                             <Button variant="secondary" onClick={() => addRightPoint(-10)}>-10</Button>
+                            <Button variant="secondary" onClick={() => addRightPoint(-5)}>-5</Button>
 
+                            <Button variant="secondary" onClick={() => addRightPoint(5)}>+5</Button>
                             <Button variant="secondary" onClick={() => addRightPoint(10)}>+10</Button>
-                            <Button variant="secondary" onClick={() => addRightPoint(40)}>+40</Button>
-                            <Button variant="secondary" onClick={() => addRightPoint(60)}>+60</Button>
-                            <Button variant="secondary" onClick={() => addRightPoint(100)}>+100</Button>
+                            <Button variant="secondary" onClick={() => addRightPoint(20)}>+20</Button>
+                            <Button variant="secondary" onClick={() => addRightPoint(30)}>+30</Button>
                         </div>
                     </div>
                 </div>
