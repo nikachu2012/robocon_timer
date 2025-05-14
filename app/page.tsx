@@ -17,7 +17,7 @@ import Link from "next/link";
 
 
 export default function Home() {
-  const [time, setTime] = useState<number>(300);
+  const [time, setTime] = useState<number>(180);
   const [isMinutes, setIsMinutes] = useState<boolean>(false);
   const [isShowPoint, setIsShowPoint] = useState<boolean>(false);
   const [leftTeamName, setLeftTeamName] = useState<string>("チームA");
@@ -35,7 +35,7 @@ export default function Home() {
 
   return (
     <div className="w-[100vw] h-[100vh] flex items-center justify-center ">
-      <Card className="w-[450px]">
+      <Card className="w-[600px]">
         <CardHeader>
           <CardTitle>ロボコンタイマー</CardTitle>
           <CardDescription>version 1.0 <a className="underline" href="https://github.com/nikachu2012/robocon_timer" target="_blank">repository</a></CardDescription>
@@ -48,12 +48,15 @@ export default function Home() {
           </div>
 
           <div className="flex w-full *:flex-grow gap-0.5">
-            <Button variant="secondary" onClick={() => addTime(-60)}>-60s</Button>
-            <Button variant="secondary" onClick={() => addTime(-30)}>-30s</Button>
+            <Button variant="secondary" onClick={() => addTime(-30)}>-60s</Button>
+            <Button variant="secondary" onClick={() => addTime(-20)}>-30s</Button>
             <Button variant="secondary" onClick={() => addTime(-10)}>-10s</Button>
+            <Button variant="secondary" onClick={() => addTime(-10)}> -5s</Button>
+
+            <Button variant="secondary" onClick={() => addTime(5)}> -5s</Button>
             <Button variant="secondary" onClick={() => addTime(10)}>+10s</Button>
+            <Button variant="secondary" onClick={() => addTime(20)}>+20s</Button>
             <Button variant="secondary" onClick={() => addTime(30)}>+30s</Button>
-            <Button variant="secondary" onClick={() => addTime(60)}>+60s</Button>
           </div>
 
           <div className="flex items-center space-x-2 pt-4 ml-1">
