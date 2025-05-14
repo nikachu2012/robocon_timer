@@ -51,7 +51,7 @@ export default function Home() {
             <Button variant="secondary" onClick={() => addTime(-30)}>-60s</Button>
             <Button variant="secondary" onClick={() => addTime(-20)}>-30s</Button>
             <Button variant="secondary" onClick={() => addTime(-10)}>-10s</Button>
-            <Button variant="secondary" onClick={() => addTime(-10)}> -5s</Button>
+            <Button variant="secondary" onClick={() => addTime(-5)}> -5s</Button>
 
             <Button variant="secondary" onClick={() => addTime(5)}> -5s</Button>
             <Button variant="secondary" onClick={() => addTime(10)}>+10s</Button>
